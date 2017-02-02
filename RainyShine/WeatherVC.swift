@@ -35,17 +35,6 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         forecastTableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if CLLocationManager.authorizationStatus() == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        
-        }
-        
-        updateWeather()
-    }
-    
     func updateWeather() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             let currentLocation = Location(latitude: locationManager.location!.coordinate.latitude,
@@ -56,12 +45,37 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
                 self.forecastTableView.reloadData()
             })
         } else {
-            // TODO: Handle case of denial
+            locationServicesNotAuthorized()
         }
     }
     
+    func locationServicesNotAuthorized() {
+        let alertController = UIAlertController(title: "Cannot determine location", message: "\(Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String) needs to use your location to determine weather conditions.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        updateWeather()
+        if status == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        } else {
+            updateWeather()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,10 +94,10 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
     
     func updateCurrentWeather(currentWeather: CurrentWeather) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
+        dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
         
-        dateLabel.text = dateFormatter.string(from: currentWeather.date)
+        dateLabel.text = "Today, \(dateFormatter.string(from: currentWeather.date))"
         currentTempLabel.text = "\(currentWeather.currentTemp)°"
         currentWeatherLabel.text = currentWeather.currentCondition
         locationLabel.text = currentWeather.location
