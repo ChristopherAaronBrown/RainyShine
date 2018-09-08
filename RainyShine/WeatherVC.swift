@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class WeatherVC: UIViewController {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
@@ -82,14 +82,13 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: - Delegate methods
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .notDetermined {
-            manager.requestWhenInUseAuthorization()
-        } else {
-            updateWeather()
-        }
-    }
+}
+
+extension WeatherVC: UITableViewDelegate {
+    
+}
+
+extension WeatherVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = forecastTableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as? ForecastCell {
@@ -105,6 +104,17 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         return forecasts.count
     }
     
+}
+
+extension WeatherVC: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        } else {
+            updateWeather()
+        }
+    }
     
 }
 

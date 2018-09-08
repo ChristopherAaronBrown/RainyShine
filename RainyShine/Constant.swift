@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  Constant.swift
 //  RainyShine
 //
 //  Created by Chris Brown on 1/10/17.
