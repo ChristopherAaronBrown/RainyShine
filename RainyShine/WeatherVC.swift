@@ -35,21 +35,33 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         forecastTableView.dataSource = self
     }
     
-    func updateWeather() {
+    private func updateWeather() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             let currentLocation = Location(latitude: locationManager.location!.coordinate.latitude,
                                            longitude: locationManager.location!.coordinate.longitude)
-            weatherService.getWeather(location: currentLocation, callback: { currentWeather, forecasts  in
+            weatherService.getWeather(location: currentLocation) { currentWeather, forecasts  in
                 self.updateCurrentWeather(currentWeather: currentWeather)
                 self.forecasts = forecasts
                 self.forecastTableView.reloadData()
-            })
+            }
         } else {
             locationServicesNotAuthorized()
         }
     }
     
-    func locationServicesNotAuthorized() {
+    private func updateCurrentWeather(currentWeather: CurrentWeather) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        
+        dateLabel.text = "Today, \(dateFormatter.string(from: currentWeather.date))"
+        currentTempLabel.text = "\(currentWeather.currentTemp)°F"
+        currentWeatherLabel.text = currentWeather.currentCondition
+        locationLabel.text = currentWeather.location
+        currentWeatherImage.image = UIImage(named: currentWeather.currentCondition)
+    }
+    
+    private func locationServicesNotAuthorized() {
         let alertController = UIAlertController(title: "Cannot determine location", message: "\(Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String) needs to use your location to determine weather conditions.", preferredStyle: .alert)
         
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
@@ -70,6 +82,7 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         present(alertController, animated: true, completion: nil)
     }
     
+    // MARK: - Delegate methods
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .notDetermined {
             manager.requestWhenInUseAuthorization()
@@ -92,16 +105,6 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource, C
         return forecasts.count
     }
     
-    func updateCurrentWeather(currentWeather: CurrentWeather) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
-        
-        dateLabel.text = "Today, \(dateFormatter.string(from: currentWeather.date))"
-        currentTempLabel.text = "\(currentWeather.currentTemp)°"
-        currentWeatherLabel.text = currentWeather.currentCondition
-        locationLabel.text = currentWeather.location
-        currentWeatherImage.image = UIImage(named: currentWeather.currentCondition)
-    }
+    
 }
 

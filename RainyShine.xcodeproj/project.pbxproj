@@ -15,6 +15,7 @@
 		836B77141E26CF8900DF5D99 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B77131E26CF8900DF5D99 /* Forecast.swift */; };
 		836B77161E26E11D00DF5D99 /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B77151E26E11D00DF5D99 /* ForecastCell.swift */; };
 		836B77181E26F11100DF5D99 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B77171E26F11100DF5D99 /* Location.swift */; };
+		83A01F881EA91EB80084F612 /* WeatherUndergroundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A01F871EA91EB80084F612 /* WeatherUndergroundService.swift */; };
 		83C0A3031E255F47004E94D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A3021E255F47004E94D6 /* AppDelegate.swift */; };
 		83C0A3051E255F47004E94D6 /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A3041E255F47004E94D6 /* WeatherVC.swift */; };
 		83C0A3081E255F47004E94D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83C0A3061E255F47004E94D6 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		836B77131E26CF8900DF5D99 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		836B77151E26E11D00DF5D99 /* ForecastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		836B77171E26F11100DF5D99 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		83A01F871EA91EB80084F612 /* WeatherUndergroundService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherUndergroundService.swift; sourceTree = "<group>"; };
 		83C0A2FF1E255F47004E94D6 /* RainyShine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainyShine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C0A3021E255F47004E94D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83C0A3041E255F47004E94D6 /* WeatherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			children = (
 				83056EEA1E275ACB00F7019F /* WeatherService.swift */,
 				83056EE81E27491000F7019F /* OpenWeatherMapService.swift */,
+				83A01F871EA91EB80084F612 /* WeatherUndergroundService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -174,12 +177,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Chris Brown";
 				TargetAttributes = {
 					83C0A2FE1E255F47004E94D6 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 4XT2VA5V66;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -278,6 +282,7 @@
 				836B77161E26E11D00DF5D99 /* ForecastCell.swift in Sources */,
 				836B77141E26CF8900DF5D99 /* Forecast.swift in Sources */,
 				836B77101E25A77200DF5D99 /* Constants.swift in Sources */,
+				83A01F881EA91EB80084F612 /* WeatherUndergroundService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +317,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -320,7 +327,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -363,7 +374,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -371,7 +384,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -407,10 +424,11 @@
 				DEVELOPMENT_TEAM = 4XT2VA5V66;
 				INFOPLIST_FILE = RainyShine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christopheraaronbrown.RainyShine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christopheraaronbrown.rainyshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -423,10 +441,11 @@
 				DEVELOPMENT_TEAM = 4XT2VA5V66;
 				INFOPLIST_FILE = RainyShine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.christopheraaronbrown.RainyShine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.christopheraaronbrown.rainyshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

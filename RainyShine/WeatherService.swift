@@ -6,7 +6,7 @@
 //  Copyright © 2017 Chris Brown. All rights reserved.
 //
 
-typealias WeatherCallback = (CurrentWeather,[Forecast]) -> ()
+typealias WeatherCallback = (CurrentWeather, [Forecast]) -> ()
 
 protocol WeatherService {
     func getWeather(location: Location, callback: @escaping WeatherCallback)
