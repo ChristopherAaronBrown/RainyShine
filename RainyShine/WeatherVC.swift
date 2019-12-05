@@ -65,7 +65,7 @@ class WeatherVC: UIViewController {
         let alertController = UIAlertController(title: "Cannot determine location", message: "\(Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String) needs to use your location to determine weather conditions.", preferredStyle: .alert)
         
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
             
